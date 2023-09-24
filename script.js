@@ -1,4 +1,4 @@
-const arr = new Array(9);
+const arr = [];
 // arr=[]
 
 // const player = (name) => {
@@ -17,14 +17,16 @@ let button = Array.from(document.getElementsByClassName("but"));
 const showMarkers=(()=>{
    function show(){for(let i=0;i<button.length;i++){
         button[i].textContent=arr[i];
+        console.log('i'+i)
 
     }}
     return {show}
 })()
 
 const player =(name,index)=>{
-    function addArray(index){
-        arr.splice(index,0,name)
+    function addArray(){
+        arr[index]=name;
+        console.log(index)
 
     }
     return {addArray}
@@ -34,17 +36,18 @@ const player =(name,index)=>{
 }
 
 const play =(()=>{
-  function change (){for(let i=0;i<button.length;i++){
-        button[i].addEventListener('click',gameLogic)
-        console.log(i)
+  function change (){for(let j=0;j<button.length;j++){
+        button[j].addEventListener('click',function(){
+            const playerX=player('X',j)
+            console.log('s'+j)
+            playerX.addArray()
+            showMarkers.show()
+        
+        })
+        console.log(button[j])
     }
     
-    function gameLogic(i){
-        const playerX=player('X',i)
-        playerX.addArray(i)
-        showMarkers.show()
-    
-    }}
+    }
     return{change}
 
 })()
