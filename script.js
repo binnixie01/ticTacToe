@@ -1,4 +1,5 @@
 const arr = [];
+let k=0;
 // arr=[]
 
 // const player = (name) => {
@@ -17,7 +18,6 @@ let button = Array.from(document.getElementsByClassName("but"));
 const showMarkers=(()=>{
    function show(){for(let i=0;i<button.length;i++){
         button[i].textContent=arr[i];
-        console.log('i'+i)
 
     }}
     return {show}
@@ -26,7 +26,6 @@ const showMarkers=(()=>{
 const player =(name,index)=>{
     function addArray(){
         arr[index]=name;
-        console.log(index)
 
     }
     return {addArray}
@@ -38,13 +37,25 @@ const player =(name,index)=>{
 const play =(()=>{
   function change (){for(let j=0;j<button.length;j++){
         button[j].addEventListener('click',function(){
-            const playerX=player('X',j)
+            
+            if(arr[j]==undefined){
+            if(k%2==0){
+                const playerX=player('X',j)
+                playerX.addArray()
+                k++;
+                
+            }else{
+                const playerX=player('O',j)
+                playerX.addArray()
+                k++;
+
+            }}
             console.log('s'+j)
-            playerX.addArray()
             showMarkers.show()
-        
+            console.log(k)
+            
         })
-        console.log(button[j])
+
     }
     
     }
@@ -54,7 +65,10 @@ const play =(()=>{
 play.change()
 
 
-
+const again = document.getElementById('again');
+again.addEventListener('click',function(){arr.length=0;
+showMarkers.show()
+})
 
 
 // button.forEach((element) =>element.adgdEventListener("click", () => arr.push('X')))
